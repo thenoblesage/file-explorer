@@ -1,0 +1,81 @@
+.application-container {
+    max-width: 80vw;
+}
+
+.back-btn {
+    background-color: #b8b8b8;
+    border-radius: 0.25rem;
+    color: snow;
+    padding: 0.5rem;
+    text-transform: uppercase;
+}
+
+.back-btn:hover {
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+@media screen and (min-width: 900px) {
+    .file-explorer {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .file-explorer {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.footer {
+    background-color: snow;
+    bottom: 0px;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.footer-text {
+    color: grey;
+}
+
+.item {
+    align-items: center;
+    border: 2px solid snow;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+    justify-content: center;
+    padding: 0.5rem;
+    position: relative;
+    width: 12rem;
+}
+
+.landing {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 36px);
+    padding: 1rem;
+}
+
+.nav-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-btn:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+.navigation {
+    bottom: 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    position: absolute;
+    width: 100%;
+}
