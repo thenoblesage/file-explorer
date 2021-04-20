@@ -1,24 +1,20 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Item from './item'
 import { PathContext } from '../context/pathContext'
+import { PathItem } from '../interfaces'
 
 const Landing: React.FC = () => {
     const UsePath = useContext(PathContext)
-    const { path, goBack } = UsePath
-    const [files, setFiles] = useState([])
+    const { deleted, files, home, path, goBack, fetchFiles, setHome } = UsePath
+    console.log('Rendering: Landing')
 
     useEffect(() => {
-        //fetch('http://localhost:5000/files', {
-        fetch('http://192.168.0.6:5000/files', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ path }),
-        })
-            .then((response) => response.json())
-            .then((data) => setFiles(data))
+        if (path === '/Users/dastullo/Desktop/') {
+            setHome(true)
+        } else {
+            setHome(false)
+        }
+        fetchFiles()
     }, [path])
 
     return (
@@ -29,14 +25,31 @@ const Landing: React.FC = () => {
                 <div className="landing">
                     <h4>React File Explorer</h4>
                     <div className="application-container">
-                        <button className="back-btn" onClick={() => goBack()}>
-                            Back
-                        </button>
+                        {home ? null : (
+                            <button
+                                className="back-btn"
+                                onClick={() => goBack()}
+                                disabled={home}
+                            >
+                                Back
+                            </button>
+                        )}
                         <hr />
                         <div className="file-explorer">
-                            {files.map((file, index) => {
-                                return <Item key={index} details={file} />
-                            })}
+                            {files
+                                .filter(
+                                    (file: PathItem) =>
+                                        !deleted.includes(file.name)
+                                )
+                                .map((file: PathItem, index: number) => {
+                                    return (
+                                        <Item
+                                            key={index}
+                                            name={file.name}
+                                            is_directory={file.is_directory}
+                                        />
+                                    )
+                                })}
                         </div>
                     </div>
                 </div>

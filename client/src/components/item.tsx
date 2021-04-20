@@ -1,14 +1,11 @@
 import React from 'react'
 import Navigation from './navigation'
+import { ItemProps } from '../interfaces'
 
-interface Props {
-    details: { name: string; is_directory: boolean }
-}
-
-const Item: React.FC<Props> = ({ details }: Props) => {
+const Item: React.FC<ItemProps> = ({ name, is_directory }) => {
     return (
         <div className="item">
-            {details.is_directory ? (
+            {is_directory ? (
                 <img
                     alt="folder-img"
                     src="https://img.icons8.com/bubbles/50/000000/folder-invoices.png"
@@ -19,8 +16,8 @@ const Item: React.FC<Props> = ({ details }: Props) => {
                     src="https://img.icons8.com/bubbles/50/000000/file.png"
                 />
             )}
-            <small>{details.name}</small>
-            <Navigation item={details} />
+            <small>{name}</small>
+            <Navigation item={{ name, is_directory }} />
         </div>
     )
 }
