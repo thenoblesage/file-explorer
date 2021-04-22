@@ -6,7 +6,6 @@ import { PathItem } from '../interfaces'
 const Landing: React.FC = () => {
     const UsePath = useContext(PathContext)
     const { deleted, files, home, path, goBack, fetchFiles, setHome } = UsePath
-    console.log('Rendering: Landing')
 
     useEffect(() => {
         if (path === '/Users/dastullo/Desktop/') {
@@ -35,7 +34,7 @@ const Landing: React.FC = () => {
                             </button>
                         )}
                         <hr />
-                        <div className="file-explorer">
+                        <div className="file-explorer grid-sizing">
                             {files
                                 .filter(
                                     (file: PathItem) =>

@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react'
-import process from 'process'
 import { PathItem } from '../interfaces'
-import { Delete } from '../interfaces'
+import { buildPath } from '../miscellaneous/helpers'
 
 export const PathContext = createContext<any>({
     path: '/Users/dastullo/Desktop/',
@@ -12,33 +11,16 @@ const PathContextProvider: React.FC = ({ children }) => {
     const [files, setFiles] = useState<PathItem[] | null>(null)
     const [home, setHome] = useState<boolean>(true)
     const [deleted, setDeleted] = useState<string[]>([])
-
-    /**
-     * Function constructs a path from the folders list.
-     */
-    const buildPath = (folders: string[]): string => {
-        let built_path = '/'
-        for (let item of folders) {
-            if (item) built_path += item + '/'
-        }
-        return built_path
-    }
+    const [password, setPassword] = useState('')
 
     /**
      * deleteItem deleted the selected file or folder. If the item selected is a folder, the use will be prompted to enter a password to confirm the action.
      */
-    const deleteItem = ({ name, is_directory, password }: Delete) => {
+    const deleteItem = ({ name, is_directory }: PathItem) => {
         console.log(
             `Trying to delete: ${name}... Is it a directory? ${is_directory}`
         )
-        if (is_directory) {
-            if (password === process.env.PASSWORD) {
-                setDeleted([...deleted, name])
-                return true
-            } else return false
-        }
         setDeleted([...deleted, name])
-        return true
     }
 
     /**
@@ -74,6 +56,10 @@ const PathContextProvider: React.FC = ({ children }) => {
         setPath(buildPath(path_arr))
     }
 
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setPassword(event.target.value)
+    }
+
     return (
         <PathContext.Provider
             value={{
@@ -83,6 +69,8 @@ const PathContextProvider: React.FC = ({ children }) => {
                 deleteItem,
                 fetchFiles,
                 files,
+                handleInput,
+                password,
                 path,
                 goBack,
                 setHome,

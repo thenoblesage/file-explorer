@@ -1,8 +1,8 @@
 import React from 'react'
+import { PathItem } from '../interfaces'
 import Navigation from './navigation'
-import { ItemProps } from '../interfaces'
 
-const Item: React.FC<ItemProps> = ({ name, is_directory }) => {
+const Item: React.FC<PathItem> = ({ name, is_directory }) => {
     return (
         <div className="item">
             {is_directory ? (

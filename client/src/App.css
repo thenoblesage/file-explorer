@@ -1,3 +1,21 @@
+@media screen and (min-width: 900px) {
+    .grid-sizing {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .grid-sizing {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .grid-sizing {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
 .application-container {
     max-width: 80vw;
 }
@@ -22,20 +40,40 @@
     text-transform: uppercase;
 }
 
-@media screen and (min-width: 900px) {
-    .file-explorer {
-        display: grid;
-        gap: 10px;
-        grid-template-columns: repeat(4, 1fr);
-    }
+.close-btn {
+    color: white;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: all 0.2s ease-in-out;
 }
 
-@media screen and (max-width: 900px) {
-    .file-explorer {
-        display: grid;
-        gap: 10px;
-        grid-template-columns: repeat(2, 1fr);
-    }
+.close-btn :hover {
+    color: red;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+.delete-btn {
+    background-color: snow;
+    border: 1px solid lightgrey;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.delete-btn:hover {
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+}
+
+.file-explorer {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-control {
+    margin: 1rem;
+    padding: 0.5rem;
+    width: 100%;
 }
 
 .footer {
@@ -69,6 +107,47 @@
     flex-direction: column;
     min-height: calc(100vh - 36px);
     padding: 1rem;
+}
+
+.modal {
+    background-color: #252b31;
+    border: 1px solid lightgrey;
+    border-radius: 0.35rem;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
+    height: 15rem;
+    left: 50%;
+    margin-left: -12.5rem;
+    margin-top: -10rem;
+    position: absolute;
+    top: 50%;
+    width: 25rem;
+    z-index: 2;
+}
+
+.modal-body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-body-text {
+    color: snow;
+}
+
+.modal-header {
+    background-color: #050c04;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.modal-header-text {
+    color: snow;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .nav-btn {

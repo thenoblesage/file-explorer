@@ -2,15 +2,10 @@ export interface BtnProps {
     item: PathItem
 }
 
-export interface Delete {
+export interface ModalType {
     name: string
     is_directory: boolean
-    password: null | string
-}
-
-export interface ItemProps {
-    name: string
-    is_directory: boolean
+    close(): void
 }
 
 export interface PathItem {
