@@ -3,7 +3,6 @@ import { PathContext } from '../context/pathContext'
 import { ModalType } from '../interfaces'
 
 const Modal: React.FC<ModalType> = ({ name, is_directory, close }) => {
-    console.log(`Modal Component - name: ${name} is_directory: ${is_directory}`)
     const usePath = useContext(PathContext)
     const { deleteItem, handleInput, password } = usePath
     return (
@@ -29,13 +28,13 @@ const Modal: React.FC<ModalType> = ({ name, is_directory, close }) => {
                 <button
                     className="delete-btn"
                     onClick={() => {
-                        console.log(
-                            `name: ${name} is_directory: ${is_directory}`
-                        )
                         if (password === process.env.REACT_APP_PASSWORD) {
                             deleteItem({ name, is_directory })
-                        } else console.log('You entered the wrong password!')
-                        close()
+                            close()
+                        } else {
+                            close()
+                            alert('The password you entered was incorrect.')
+                        }
                     }}
                 >
                     Delete

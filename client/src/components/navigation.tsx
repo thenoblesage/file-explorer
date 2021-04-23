@@ -54,6 +54,7 @@ const Navigation: React.FC<BtnProps> = ({ item }) => {
                             className="nav-btn"
                             src="https://img.icons8.com/material-two-tone/24/000000/enter-2--v2.png"
                             onClick={() => enterDirectory(item.name)}
+                            data-testid="enter-btn"
                         />
                         <img
                             alt="delete-button"
@@ -62,6 +63,7 @@ const Navigation: React.FC<BtnProps> = ({ item }) => {
                             onClick={() => {
                                 setModal(true)
                             }}
+                            data-testid="delete-btn"
                         />
                     </>
                 ) : (
@@ -71,12 +73,14 @@ const Navigation: React.FC<BtnProps> = ({ item }) => {
                             className="nav-btn"
                             src="https://img.icons8.com/plumpy/24/000000/download--v1.png"
                             onClick={() => getFile()}
+                            data-testid="download-btn"
                         />
                         <img
                             alt="delete-button"
                             className="nav-btn"
                             src="https://img.icons8.com/plumpy/24/000000/delete-sign.png"
                             onClick={() => deleteItem({ ...item })}
+                            data-testid="delete-btn"
                         />
                     </>
                 )}

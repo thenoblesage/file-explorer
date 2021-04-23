@@ -22,7 +22,7 @@ const Landing: React.FC = () => {
                 <p>Loading ...</p>
             ) : (
                 <div className="landing">
-                    <h4>React File Explorer</h4>
+                    <h4 data-testid="heading">React File Explorer</h4>
                     <div className="application-container">
                         {home ? null : (
                             <button

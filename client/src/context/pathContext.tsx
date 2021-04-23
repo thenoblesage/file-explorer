@@ -3,11 +3,13 @@ import { PathItem } from '../interfaces'
 import { buildPath } from '../miscellaneous/helpers'
 
 export const PathContext = createContext<any>({
-    path: '/Users/dastullo/Desktop/',
+    path: process.env.REACT_APP_HOME_PATH,
 })
 
 const PathContextProvider: React.FC = ({ children }) => {
-    const [path, setPath] = useState<string>('/Users/dastullo/Desktop/')
+    const [path, setPath] = useState<string | undefined>(
+        process.env.REACT_APP_HOME_PATH
+    )
     const [files, setFiles] = useState<PathItem[] | null>(null)
     const [home, setHome] = useState<boolean>(true)
     const [deleted, setDeleted] = useState<string[]>([])
@@ -17,9 +19,6 @@ const PathContextProvider: React.FC = ({ children }) => {
      * deleteItem deleted the selected file or folder. If the item selected is a folder, the use will be prompted to enter a password to confirm the action.
      */
     const deleteItem = ({ name, is_directory }: PathItem) => {
-        console.log(
-            `Trying to delete: ${name}... Is it a directory? ${is_directory}`
-        )
         setDeleted([...deleted, name])
     }
 
@@ -34,7 +33,7 @@ const PathContextProvider: React.FC = ({ children }) => {
      * The function makes an API call to get all items located within a folder.
      */
     const fetchFiles = async () => {
-        fetch('http://192.168.0.6:5000/files', {
+        fetch('http://localhost:5000/files', {
             method: 'POST',
             mode: 'cors',
             headers: {
@@ -50,10 +49,12 @@ const PathContextProvider: React.FC = ({ children }) => {
      * Function acts as a previous button in the navigation bar.
      */
     const goBack = (): void => {
-        let path_arr = path.split('/')
-        path_arr.pop()
-        path_arr.pop()
-        setPath(buildPath(path_arr))
+        if (path) {
+            let path_arr = path.split('/')
+            path_arr.pop()
+            path_arr.pop()
+            setPath(buildPath(path_arr))
+        }
     }
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
